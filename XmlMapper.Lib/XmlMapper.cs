@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Xml;
+using System.Xml.Linq;
+using System.Xml.XPath;
 
 namespace XmlMapper
 {
@@ -18,36 +20,43 @@ namespace XmlMapper
         private static IList MapToCollection(Type itemType, MappingConfiguration config, string xmlString)
         {
             var list = new List<object>();
-            var doc = new XmlDocument();
-            doc.LoadXml(xmlString);
+            var xdoc = XDocument.Load(new StringReader(xmlString));
 
             var classMap = config.GetClassMap(itemType)
                 ?? throw new Exception($"No mapping configuration found for type {itemType}");
 
-            var selectedNodes = doc.SelectNodes(classMap.GetObjectXPath())
+            var selectedNodes = xdoc.XPathSelectElements(classMap.GetObjectXPath())
                 ?? throw new Exception("Elements not found for the specified XPath");
 
 
 
-            foreach (XmlNode node in selectedNodes)
+            foreach (var xnode in selectedNodes)
             {
                 var obj = Activator.CreateInstance(itemType);
 
                 foreach (var propMap in classMap.GetPropertyMaps())
                 {
-                    var valueNode = node.SelectSingleNode(propMap.XPath);
-                    if (valueNode != null)
+
+                    var values = (IEnumerable)xnode.XPathEvaluate(propMap.XPath);
+                    string value = string.Empty;
+                    foreach (var result in values)
                     {
-                        var value = valueNode.InnerText;
-                        var propInfo = propMap.Property;
-                        var convertedValue = _converter.ConvertToDestinationType(value, propInfo.PropertyType);
+                        if (result is XElement xElement)
+                            value = xElement.Value;
 
-                        if (propMap.Converter != null)
-                            convertedValue = propMap.Converter.DynamicInvoke(convertedValue);
-
-                        propInfo.SetValue(obj, convertedValue);
+                        else if (result is XAttribute xAttribute)
+                            value = xAttribute.Value;
                     }
+
+                    var propInfo = propMap.Property;
+                    var convertedValue = _converter.ConvertToDestinationType(value, propInfo.PropertyType);
+
+                    if (propMap.Converter != null)
+                        convertedValue = propMap.Converter.DynamicInvoke(convertedValue);
+
+                    propInfo.SetValue(obj, convertedValue);
                 }
+
 
                 foreach (var linkedPropMap in classMap.GetLinkedPropertyMaps())
                 {
@@ -71,9 +80,9 @@ namespace XmlMapper
 
         public static List<T> MapToCollection<T>(MappingConfiguration config, string xmlString)
         {
-          return MapToCollection(typeof(T), config, xmlString)
-                .Cast<T>()
-                .ToList();
+            return MapToCollection(typeof(T), config, xmlString)
+                  .Cast<T>()
+                  .ToList();
         }
 
         public static T MapToObject<T>(MappingConfiguration config, string xmlString)
