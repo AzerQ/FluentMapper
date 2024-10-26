@@ -5,6 +5,10 @@ using System.Reflection;
 
 namespace XmlMapper.Core.Models
 {
+    /// <summary>
+    /// Represents a mapping between a source object and an XML document.
+    /// </summary>
+    /// <typeparam name="TSource">The type of the source object.</typeparam>
     public class ClassMap<TSource>
     {
         private readonly Type _type;
@@ -12,7 +16,13 @@ namespace XmlMapper.Core.Models
         private readonly List<PropertyMap> _propertyMaps = new List<PropertyMap>();
         private readonly List<LinkedPropertyMap> _linkedPropertyMaps = new List<LinkedPropertyMap>();
 
-
+        /// <summary>
+        /// Initializes a new instance of the ClassMap class.
+        /// </summary>
+        /// <param name="type">The type of the source object.</param>
+        /// <param name="objectXPath">The XPath expression for selecting the object in the XML document.</param>
+        /// <param name="propertyMaps">The property maps for the source object.</param>
+        /// <param name="linkedPropertyMaps">The linked property maps for the source object.</param>
         public ClassMap(Type type, string objectXPath, List<PropertyMap> propertyMaps,
             List<LinkedPropertyMap> linkedPropertyMaps) :
             this(type, objectXPath)
@@ -21,6 +31,11 @@ namespace XmlMapper.Core.Models
             _linkedPropertyMaps = linkedPropertyMaps;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the ClassMap class.
+        /// </summary>
+        /// <param name="type">The type of the source object.</param>
+        /// <param name="objectXPath">The XPath expression for selecting the object in the XML document.</param>
         public ClassMap(Type type, string objectXPath)
         {
             _type = type;
@@ -55,6 +70,14 @@ namespace XmlMapper.Core.Models
             return propInfo;
         }
 
+        /// <summary>
+        /// Adds a property map for a specific property of the source object.
+        /// </summary>
+        /// <typeparam name="TProperty">The type of the property.</typeparam>
+        /// <param name="propertyExpr">The property expression.</param>
+        /// <param name="xpath">The XPath expression for selecting the property value in the XML document.</param>
+        /// <param name="postConverter">The post-conversion function for the property value (optional).</param>
+        /// <returns>The ClassMap instance for method chaining.</returns>
         public ClassMap<TSource> ForProperty<TProperty>(Expression<Func<TSource, TProperty>> propertyExpr, string xpath, Func<TProperty, TProperty> postConverter = null)
         {
             var propertyMap = new PropertyMap(GetPropertyInfo(propertyExpr), xpath, postConverter: postConverter);
@@ -77,12 +100,34 @@ namespace XmlMapper.Core.Models
             return this;
         }
 
+        /// <summary>
+        /// Retrieves the type of the source object.
+        /// </summary>
+        /// <returns>The type of the source object.</returns>
         public Type GetMappedType() => _type;
+
+        /// <summary>
+        /// Retrieves the XPath expression for selecting the object in the XML document.
+        /// </summary>
+        /// <returns>The XPath expression for selecting the object in the XML document.</returns>
         public string GetObjectXPath() => _objectXPath;
+
+        /// <summary>
+        /// Retrieves the property maps for the source object.
+        /// </summary>
+        /// <returns>The property maps for the source object.</returns>
         public List<PropertyMap> GetPropertyMaps() => _propertyMaps;
 
+        /// <summary>
+        /// Retrieves the linked property maps for the source object.
+        /// </summary>
+        /// <returns>The linked property maps for the source object.</returns>
         public List<LinkedPropertyMap> GetLinkedPropertyMaps() => _linkedPropertyMaps;
 
+        /// <summary>
+        /// Creates a new ClassMap instance with the same type, object XPath, property maps, and linked property maps, but with the generic type set to object.
+        /// </summary>
+        /// <returns>The new ClassMap instance.</returns>
         public ClassMap<object> ToNoneGenericClassMap()
         {
             return new ClassMap<object>(_type, _objectXPath, _propertyMaps, _linkedPropertyMaps);

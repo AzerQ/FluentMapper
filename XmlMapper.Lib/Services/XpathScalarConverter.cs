@@ -4,6 +4,10 @@ using System.Xml.Linq;
 
 namespace XmlMapper.Core.Services
 {
+    /// <summary>
+    /// Provides functionality for converting XPath results to a scalar value.
+    /// Implements the <see cref="IXpathScalarConverter"/> interface.
+    /// </summary>
     public class XpathScalarConverter : IXpathScalarConverter
     {
         public string GetXpathResultValue(object xpathResult)

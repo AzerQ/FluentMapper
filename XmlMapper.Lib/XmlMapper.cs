@@ -11,6 +11,9 @@ using XmlMapper.Core.Services;
 
 namespace XmlMapper.Core
 {
+    /// <summary>
+    /// Provides functionality for mapping XML data to objects using a specified mapping configuration.
+    /// </summary>
     public class XmlMapper : IXmlMapper
     {
 

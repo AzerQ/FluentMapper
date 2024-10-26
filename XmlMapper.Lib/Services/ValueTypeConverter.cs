@@ -3,6 +3,10 @@ using System.ComponentModel;
 
 namespace XmlMapper.Core.Services
 {
+    /// <summary>
+    /// Provides functionality for converting values to a specified destination type.
+    /// Implements the <see cref="ITypeConverter"/> interface.
+    /// </summary>
     public class ValueTypeConverter : ITypeConverter
     {
         public object ConvertToDestinationType(object source, Type destinationType)
