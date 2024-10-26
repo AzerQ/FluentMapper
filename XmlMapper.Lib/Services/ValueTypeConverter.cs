@@ -1,9 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace XmlMapper
+namespace XmlMapper.Core.Services
 {
-    public class ValueConverter : IConverter
+    public class ValueTypeConverter : ITypeConverter
     {
         public object ConvertToDestinationType(object source, Type destinationType)
         {

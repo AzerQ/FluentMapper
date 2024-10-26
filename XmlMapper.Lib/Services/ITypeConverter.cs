@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace XmlMapper
+namespace XmlMapper.Core.Services
 {
-    public interface IConverter
+    public interface ITypeConverter
     {
         object ConvertToDestinationType(object source, Type destinationType);
     }

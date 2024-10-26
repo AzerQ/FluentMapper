@@ -1,4 +1,7 @@
-﻿namespace XmlMapper.ConsoleApp
+﻿using XmlMapper.Core;
+using XmlMapper.Core.Builders;
+
+namespace XmlMapper.ConsoleApp
 {
     internal class Program
     {
@@ -29,7 +32,9 @@
 
             var xmlString = XmlTest.UserContext;
 
-            User user = XmlMapper.MapToObject<User>(mappingConfig, xmlString);
+            IXmlMapper xmlMapper = XmlMapperFactory.DefaultXmlMapper;
+
+            User user = xmlMapper.MapToObject<User>(mappingConfig, xmlString);
 
         }
     }

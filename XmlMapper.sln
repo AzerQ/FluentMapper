@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XmlMapper.Lib", "XmlMapper.Lib\XmlMapper.Lib.csproj", "{1F8F9DAB-14E6-4564-8816-2EBB36947B5D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XmlMapper.Core", "XmlMapper.Lib\XmlMapper.Core.csproj", "{1F8F9DAB-14E6-4564-8816-2EBB36947B5D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XmlMapper.ConsoleApp", "XmlMapper.ConsoleApp\XmlMapper.ConsoleApp.csproj", "{18629685-DBE6-47D7-9189-27ABC876136F}"
 EndProject

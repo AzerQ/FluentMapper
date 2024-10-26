@@ -3,23 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace XmlMapper
+namespace XmlMapper.Core.Models
 {
-    public class PropertyMap
-    {
-        public PropertyInfo Property { get; }
-        public string XPath { get; }
-        public Delegate Converter { get; }
-
-        public PropertyMap(PropertyInfo property, string xpath, Delegate converter = null)
-        {
-            Property = property;
-            XPath = xpath;
-            Converter = converter;
-        }
-    }
-
-
     public class LinkedPropertyMap
     {
         public PropertyInfo Property { get; private set; }
@@ -38,7 +23,7 @@ namespace XmlMapper
                 propType.GetGenericTypeDefinition() == typeof(List<>);
 
             ItemType = IsCollection ? propType.GetGenericArguments().First() : propType;
-            
+
         }
     }
 

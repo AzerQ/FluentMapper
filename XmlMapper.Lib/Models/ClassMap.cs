@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace XmlMapper
+namespace XmlMapper.Core.Models
 {
     public class ClassMap<TSource>
     {
@@ -13,8 +13,8 @@ namespace XmlMapper
         private readonly List<LinkedPropertyMap> _linkedPropertyMaps = new List<LinkedPropertyMap>();
 
 
-        public ClassMap(Type type, string objectXPath, List<PropertyMap> propertyMaps, 
-            List<LinkedPropertyMap> linkedPropertyMaps) : 
+        public ClassMap(Type type, string objectXPath, List<PropertyMap> propertyMaps,
+            List<LinkedPropertyMap> linkedPropertyMaps) :
             this(type, objectXPath)
         {
             _propertyMaps = propertyMaps;
@@ -55,12 +55,20 @@ namespace XmlMapper
             return propInfo;
         }
 
-        public ClassMap<TSource> ForProperty<TProperty>(Expression<Func<TSource, TProperty>> propertyExpr, string xpath, Func<TProperty, TProperty> converter = null)
+        public ClassMap<TSource> ForProperty<TProperty>(Expression<Func<TSource, TProperty>> propertyExpr, string xpath, Func<TProperty, TProperty> postConverter = null)
         {
-            var propertyMap = new PropertyMap(GetPropertyInfo(propertyExpr), xpath, converter);
+            var propertyMap = new PropertyMap(GetPropertyInfo(propertyExpr), xpath, postConverter: postConverter);
             _propertyMaps.Add(propertyMap);
             return this;
         }
+
+        public ClassMap<TSource> ForPropertyCustom<TProperty>(Expression<Func<TSource, TProperty>> propertyExpr, string xpath, Func<TProperty, TProperty> preConverter)
+        {
+            var propertyMap = new PropertyMap(GetPropertyInfo(propertyExpr), xpath, preConverter: preConverter);
+            _propertyMaps.Add(propertyMap);
+            return this;
+        }
+
 
         public ClassMap<TSource> ForLinkedProperty<TProperty>(Expression<Func<TSource, IEnumerable<TProperty>>> propertyExpr)
         {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace XmlMapper
+namespace XmlMapper.Core.Models
 {
     public class MappingConfiguration
     {
