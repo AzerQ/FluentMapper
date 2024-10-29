@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Git", "Git", "{73B24653-AF7
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlMapper.Tests", "XmlMapper.Tests\XmlMapper.Tests.csproj", "{6A1A406D-8584-4E13-B30A-3D1A07A3E1DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{18629685-DBE6-47D7-9189-27ABC876136F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18629685-DBE6-47D7-9189-27ABC876136F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18629685-DBE6-47D7-9189-27ABC876136F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A1A406D-8584-4E13-B30A-3D1A07A3E1DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A1A406D-8584-4E13-B30A-3D1A07A3E1DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A1A406D-8584-4E13-B30A-3D1A07A3E1DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A1A406D-8584-4E13-B30A-3D1A07A3E1DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
