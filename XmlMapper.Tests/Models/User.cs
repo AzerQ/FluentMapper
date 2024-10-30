@@ -1,15 +1,17 @@
-﻿namespace XmlMapper.Tests.Models
+﻿using XmlMapper.Tests.EqualityComparers;
+
+namespace XmlMapper.Tests.Models
 {
-    public class User
+    public record User
     {
-        public string FullName { get; set; }
-        public string Login { get; set; }
+        public static IEqualityComparer<User> UserComparer { get; } = new UserEqualityComparer();
+        public string? FullName { get; set; }
+        public string? Login { get; set; }
         public int Age { get; set; }
-        public string BIO { get; set; }
+        public string? Bio { get; set; }
         public bool IsActive { get; set; }
         public DateTime JoinDate { get; set; }
-        public Address Address { get; set; }
-        public List<Role> Roles { get; set; }
+        public Address? Address { get; set; }
+        public List<Role>? Roles { get; set; }
     }
-
 }

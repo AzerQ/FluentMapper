@@ -93,7 +93,7 @@ namespace XmlMapper.Core.Models
         }
 
 
-        public ClassMap<TSource> ForLinkedProperty<TProperty>(Expression<Func<TSource, IEnumerable<TProperty>>> propertyExpr)
+        public ClassMap<TSource> ForLinkedProperty<TProperty>(Expression<Func<TSource,TProperty>> propertyExpr)
         {
             var propertyMap = new LinkedPropertyMap(GetPropertyInfo(propertyExpr));
             _linkedPropertyMaps.Add(propertyMap);
