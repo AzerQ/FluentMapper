@@ -119,7 +119,11 @@
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="UsersContext" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\UsersContext.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+    <value>XmlData\UsersContext.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
     <comment>Users xml data for testing</comment>
+  </data>
+  <data name="LibraryContext" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>XmlData\LibraryContext.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+    <comment>Library xml data for testing</comment>
   </data>
 </root>

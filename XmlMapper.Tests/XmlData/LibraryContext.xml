@@ -1,0 +1,20 @@
+<LibraryContext>
+    <Book>
+        <Title>The Great Gatsby</Title>
+        <Author>F. Scott Fitzgerald</Author>
+        <Year>1925</Year>
+        <Genres>
+            <Genre name='Novel'/>
+            <Genre name='Fiction'/>
+        </Genres>
+    </Book>
+    <Book>
+        <Title>To Kill a Mockingbird</Title>
+        <Author>Harper Lee</Author>
+        <Year>1960</Year>
+        <Genres>
+            <Genre name='Classic'/>
+            <Genre name='Drama'/>
+        </Genres>
+    </Book>
+</LibraryContext>
