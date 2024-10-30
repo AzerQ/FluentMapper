@@ -20,18 +20,18 @@ public static class UserMappingConfiguration
                     .ForProperty(u => u.Bio, "BIO")
                     .ForProperty(u => u.IsActive, "IsActive")
                     .ForProperty(u => u.JoinDate, "JoinDate")
-                    .ForLinkedProperty(u => u.Roles)
-                    .ForLinkedProperty(u => u.Address);
+                    .ForLinkedProperty(u => u.Roles, useDeclaredClassXmlElement: true )
+                    .ForLinkedProperty(u => u.Address, useDeclaredClassXmlElement: true);
 
             })
-            .AddClassConfiguration<Role>("/UsersContext/User/Roles/Role", classMap =>
+            .AddClassConfiguration<Role>("//Roles/Role", classMap =>
             {
                 classMap
                     .ForProperty(r => r.Id, "@id")
                     .ForProperty(r => r.Name, "@name")
                     .ForProperty(r => r.Description, "@description");
             })
-            .AddClassConfiguration<Address>("/UsersContext/User/Address", classMap =>
+            .AddClassConfiguration<Address>("//Address", classMap =>
             {
                 classMap
                     .ForProperty(a => a.City, "City")

@@ -10,15 +10,14 @@ public sealed class UserEqualityComparer : IEqualityComparer<User>
         if (ReferenceEquals(x, null)) return false;
         if (ReferenceEquals(y, null)) return false;
         if (x.GetType() != y.GetType()) return false;
-        return string.Equals(x.FullName, y.FullName, StringComparison.InvariantCultureIgnoreCase) 
-               && string.Equals(x.Login, y.Login, StringComparison.InvariantCultureIgnoreCase) 
-               && x.Age == y.Age 
-               && string.Equals(x.Bio, y.Bio, StringComparison.InvariantCultureIgnoreCase) 
-               && x.IsActive == y.IsActive 
-               && x.JoinDate.Equals(y.JoinDate) 
-               && Equals(x.Address, y.Address) 
-               && x.Roles != null && y.Roles!= null
-               && x.Roles.SequenceEqual(y.Roles);
+        return string.Equals(x.FullName, y.FullName, StringComparison.InvariantCultureIgnoreCase)
+               && string.Equals(x.Login, y.Login, StringComparison.InvariantCultureIgnoreCase)
+               && x.Age == y.Age
+               && string.Equals(x.Bio, y.Bio, StringComparison.InvariantCultureIgnoreCase)
+               && x.IsActive == y.IsActive
+               && x.JoinDate.Equals(y.JoinDate)
+               && Equals(x.Address, y.Address)
+               && CollectionComparer.CollectionsEquals(x.Roles, y.Roles);
     }
 
     public int GetHashCode(User obj)

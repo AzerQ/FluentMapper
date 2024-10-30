@@ -25,4 +25,25 @@ public static class ModelManualCreator
             JoinDate = new DateTime(2022, 03, 15)
         };
     }
+
+    public static List<Book> CreateBooksList()
+    {
+        return
+        [
+            new Book
+            {
+                Title = "The Great Gatsby",
+                Author = "F. Scott Fitzgerald",
+                Year = 1925,
+                Genres = [new Genre {Name = "Novel"}, new Genre {Name = "Fiction"}]
+            },
+            new Book
+            {
+                Title = "To Kill a Mockingbird",
+                Author = "Harper Lee",
+                Year = 1960,
+                Genres = [new Genre {Name = "Classic"}, new Genre {Name = "Drama"}]
+            }
+        ];
+    }
 }
