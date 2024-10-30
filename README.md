@@ -1,23 +1,23 @@
 # XmlMapper
 
-`XmlMapper` — это библиотека для удобного маппинга данных из XML на C#-классы с использованием XPath-селекторов. Поддерживает гибкую настройку маппинга, включая преобразование значений и вложенные объекты.
+`XmlMapper` is a library for convenient mapping of data from XML to C# classes using XPath selectors. It supports flexible mapping configuration, including value transformations and nested objects.
 
-## Установка
+## Installation
 
-Для начала, добавьте проект как зависимость в ваше приложение.
+First, add the project as a dependency in your application.
 
 ```bash
-# Предполагаемая команда для установки (например, через NuGet)
+# Assumed command for installation (e.g., via NuGet)
 dotnet add package XmlMapper
 ```
 
-## Быстрый старт
+## Quick Start
 
-Библиотека позволяет настроить маппинг между XML-данными и C#-классами через `MappingConfigurationBuilder`, задавая маппинг свойств и вложенных объектов.
+The library allows you to configure the mapping between XML data and C# classes through `MappingConfigurationBuilder`, specifying the mapping of properties and nested objects.
 
-### Подготовка данных и сущностей
+### Preparing Data and Entities
 
-1. Нам поступают данные в формате XML следующего вида:
+1. We receive data in XML format as follows:
 ```xml
 <LibraryContext>
     <Book>
@@ -32,7 +32,7 @@ dotnet add package XmlMapper
     </Book>
 </LibraryContext>
 ```
-2. Объявим сущности в коде, для того чтобы можно было работать с данными:
+2. Let's declare the entities in code so that we can work with the data:
 ```csharp
 public class Book
 {
@@ -47,11 +47,10 @@ public class Genre
 {
     public string Name { get; set; }
 }
-
 ```
 
-### Настройка маппинга
-Чтобы связать XML с классами, используйте `MappingConfigurationBuilder`:
+### Mapping Configuration
+To link XML with classes, use `MappingConfigurationBuilder`:
 ```csharp
 var configBuilder = new MappingConfigurationBuilder();
 
@@ -61,9 +60,9 @@ configBuilder
         classMap
             .ForProperty(b => b.Title, "Title")
             .ForProperty(b => b.Author, "Author")
-            .ForProperty(b => b.Year, "Year", year => year + 1) // преобразование значения
+            .ForProperty(b => b.Year, "Year", year => year + 1) // value transformation
             .ForProperty(b => b.Synopsis, "Synopsis", syn => "Synopsis: " + syn)
-            .ForLinkedProperty(b => b.Genres); // маппинг для вложенного списка
+            .ForLinkedProperty(b => b.Genres); // mapping for nested list
     })
     .AddClassConfiguration<Genre>("/LibraryContext/Book/Genres/Genre", classMap =>
     {
@@ -74,16 +73,16 @@ configBuilder
 var mappingConfig = configBuilder.Build();
 ```
 
-### Маппинг XML данных к объекту
-После настройки можно вызвать метод `MapToObject`, чтобы получить экземпляр `Book` с заполненными данными из XML:
+### Mapping XML Data to Object
+After configuration, you can call the `MapToObject` method to get an instance of `Book` with data filled from XML:
 ```csharp
 var xmlMapper = XmlMapperFactory.DefaultXmlMapper;
 Book book = xmlMapper.MapToObject<Book>(mappingConfig, xmlString);
 ```
 
-## Примеры использования
-### Простое сопоставление без преобразования
-Для базового маппинга свойств используйте `ForProperty`:
+## Usage Examples
+### Simple Mapping Without Transformation
+For basic property mapping, use `ForProperty`:
 ```csharp
 configBuilder.AddClassConfiguration<Book>("/LibraryContext/Book", classMap =>
 {
@@ -94,26 +93,25 @@ configBuilder.AddClassConfiguration<Book>("/LibraryContext/Book", classMap =>
         .ForProperty(b => b.Synopsis, "Synopsis");
 });
 ```
-
-### Сопоставление с преобразованием значений
-Чтобы выполнить преобразование значения перед маппингом, передайте функцию преобразования:
+### Mapping with Value Transformation
+To perform value transformation before mapping, pass a transformation function:
 ```csharp
 configBuilder.AddClassConfiguration<Book>("/LibraryContext/Book", classMap =>
 {
     classMap
-        .ForProperty(b => b.Year, "Year", year => year + 1) // добавляет 1 к году
-        .ForProperty(b => b.Synopsis, "Synopsis", syn => syn.ToUpper()); // переводим в верхний регистр
+        .ForProperty(b => b.Year, "Year", year => year + 1) // adds 1 to the year
+        .ForProperty(b => b.Synopsis, "Synopsis", syn => syn.ToUpper()); // converts to uppercase
 });
 ```
 
-### Маппинг вложенных объектов
-Для маппинга вложенных объектов используйте `ForLinkedProperty`:
+### Mapping Nested Objects
+To map nested objects, use `ForLinkedProperty`:
 
 ```csharp
 configBuilder.AddClassConfiguration<Book>("/LibraryContext/Book", classMap =>
 {
     classMap
-        .ForLinkedProperty(b => b.Genres); // ссылка на другой класс
+        .ForLinkedProperty(b => b.Genres); // reference to another class
 });
 
 configBuilder.AddClassConfiguration<Genre>("/LibraryContext/Book/Genres/Genre", classMap =>
@@ -123,8 +121,8 @@ configBuilder.AddClassConfiguration<Genre>("/LibraryContext/Book/Genres/Genre", 
 });
 ```
 
-### Поддержка списков объектов
-Библиотека поддерживает маппинг в списки объектов:
+### Support for Object Lists
+The library supports mapping to lists of objects:
 ```csharp
 List<Book> books = xmlMapper.MapToCollection<Book>(mappingConfig, xmlString);
 ```

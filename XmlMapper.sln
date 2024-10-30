@@ -15,6 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Git", "Git", "{73B24653-AF7
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{A3338128-F8E8-4A4A-AB76-2D9CACBA64D4}"
 	ProjectSection(SolutionItems) = preProject
+		README_ru.md = README_ru.md
 		README.md = README.md
 	EndProjectSection
 EndProject
