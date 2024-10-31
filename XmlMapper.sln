@@ -5,14 +5,13 @@ VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XmlMapper.Core", "XmlMapper.Lib\XmlMapper.Core.csproj", "{1F8F9DAB-14E6-4564-8816-2EBB36947B5D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XmlMapper.ConsoleApp", "XmlMapper.ConsoleApp\XmlMapper.ConsoleApp.csproj", "{18629685-DBE6-47D7-9189-27ABC876136F}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Git", "Git", "{73B24653-AF71-4523-876C-A34CC7752416}"
 	ProjectSection(SolutionItems) = preProject
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlMapper.Tests", "XmlMapper.Tests\XmlMapper.Tests.csproj", "{6A1A406D-8584-4E13-B30A-3D1A07A3E1DB}"
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{A3338128-F8E8-4A4A-AB76-2D9CACBA64D4}"
 	ProjectSection(SolutionItems) = preProject
 		README_ru.md = README_ru.md
@@ -29,10 +28,10 @@ Global
 		{1F8F9DAB-14E6-4564-8816-2EBB36947B5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F8F9DAB-14E6-4564-8816-2EBB36947B5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F8F9DAB-14E6-4564-8816-2EBB36947B5D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{18629685-DBE6-47D7-9189-27ABC876136F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{18629685-DBE6-47D7-9189-27ABC876136F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{18629685-DBE6-47D7-9189-27ABC876136F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{18629685-DBE6-47D7-9189-27ABC876136F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A1A406D-8584-4E13-B30A-3D1A07A3E1DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A1A406D-8584-4E13-B30A-3D1A07A3E1DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A1A406D-8584-4E13-B30A-3D1A07A3E1DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A1A406D-8584-4E13-B30A-3D1A07A3E1DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

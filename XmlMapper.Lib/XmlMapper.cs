@@ -57,8 +57,9 @@ namespace XmlMapper.Core
 
             foreach (var linkedPropMap in classMap.GetLinkedPropertyMaps())
             {
+                string xmlText = linkedPropMap.UseDeclaredClassXmlElement ? xElement.ToString() : fullXmlContext;
 
-                var linkedObjectsList = MapToCollection(linkedPropMap.ItemType, config, fullXmlContext);
+                var linkedObjectsList = MapToCollection(linkedPropMap.ItemType, config, xmlText);
 
                 if (linkedPropMap.IsCollection)
                     linkedPropMap.Property.SetValue(obj, linkedObjectsList.CastToTyped(linkedPropMap.ItemType));

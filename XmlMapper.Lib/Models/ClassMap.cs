@@ -59,7 +59,8 @@ namespace XmlMapper.Core.Models
             }
 
             Type type = typeof(TSource);
-            if (propInfo.ReflectedType != null && type != propInfo.ReflectedType && !type.IsSubclassOf(propInfo.ReflectedType))
+            if (propInfo.ReflectedType != null && type != propInfo.ReflectedType &&
+                !type.IsSubclassOf(propInfo.ReflectedType))
             {
                 throw new ArgumentException(string.Format(
                     "Expression '{0}' refers to a property that is not from type {1}.",
@@ -78,14 +79,36 @@ namespace XmlMapper.Core.Models
         /// <param name="xpath">The XPath expression for selecting the property value in the XML document.</param>
         /// <param name="postConverter">The post-conversion function for the property value (optional).</param>
         /// <returns>The ClassMap instance for method chaining.</returns>
-        public ClassMap<TSource> ForProperty<TProperty>(Expression<Func<TSource, TProperty>> propertyExpr, string xpath, Func<TProperty, TProperty> postConverter = null)
+        public ClassMap<TSource> ForProperty<TProperty>(Expression<Func<TSource, TProperty>> propertyExpr, string xpath,
+            Func<TProperty, TProperty> postConverter = null)
         {
             var propertyMap = new PropertyMap(GetPropertyInfo(propertyExpr), xpath, postConverter: postConverter);
             _propertyMaps.Add(propertyMap);
             return this;
         }
 
-        public ClassMap<TSource> ForPropertyCustom<TProperty>(Expression<Func<TSource, TProperty>> propertyExpr, string xpath, Func<TProperty, TProperty> preConverter)
+        /// <summary>
+        /// Automatically maps a property to an XML element or attribute based on the property name.
+        /// </summary>
+        /// <remarks>Generate  xpath selector in this format: PropertyName | @PropertyName</remarks>
+        /// <typeparam name="TProperty">The type of the property.</typeparam>
+        /// <param name="propertyExpr">The expression representing the property.</param>
+        /// <returns>The ClassMap instance for method chaining.</returns>
+        public ClassMap<TSource> ForPropertyAuto<TProperty>(Expression<Func<TSource, TProperty>> propertyExpr)
+        {
+            PropertyInfo propertyInfo = GetPropertyInfo(propertyExpr);
+
+            string attributeName;
+            string elementName = attributeName = propertyInfo.Name;
+            string xpathSelector = $"{elementName} | @{attributeName}";
+
+            var propertyMap = new PropertyMap(propertyInfo, xpathSelector);
+            _propertyMaps.Add(propertyMap);
+            return this;
+        }
+
+        public ClassMap<TSource> ForPropertyCustom<TProperty>(Expression<Func<TSource, TProperty>> propertyExpr,
+            string xpath, Func<TProperty, TProperty> preConverter)
         {
             var propertyMap = new PropertyMap(GetPropertyInfo(propertyExpr), xpath, preConverter: preConverter);
             _propertyMaps.Add(propertyMap);
@@ -93,9 +116,17 @@ namespace XmlMapper.Core.Models
         }
 
 
-        public ClassMap<TSource> ForLinkedProperty<TProperty>(Expression<Func<TSource, IEnumerable<TProperty>>> propertyExpr)
+        /// <summary>
+        /// Adds a linked property map for a specific property of the source object.
+        /// </summary>
+        /// <typeparam name="TProperty">The type of the property.</typeparam>
+        /// <param name="propertyExpr">The property expression.</param>
+        /// <param name="useDeclaredClassXmlElement">Indicates whether to use the declared class XML element.</param>
+        /// <returns>The ClassMap instance for method chaining.</returns>
+        public ClassMap<TSource> ForLinkedProperty<TProperty>(Expression<Func<TSource, TProperty>> propertyExpr,
+            bool useDeclaredClassXmlElement = false)
         {
-            var propertyMap = new LinkedPropertyMap(GetPropertyInfo(propertyExpr));
+            var propertyMap = new LinkedPropertyMap(GetPropertyInfo(propertyExpr), useDeclaredClassXmlElement);
             _linkedPropertyMaps.Add(propertyMap);
             return this;
         }
@@ -132,7 +163,5 @@ namespace XmlMapper.Core.Models
         {
             return new ClassMap<object>(_type, _objectXPath, _propertyMaps, _linkedPropertyMaps);
         }
-
     }
-
 }

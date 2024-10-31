@@ -11,12 +11,18 @@ namespace XmlMapper.Core.Models
         private readonly Dictionary<Type, ClassMap<object>> _classMaps;
 
         /// <summary>
+        /// ConfigurationName
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
         /// Initializes a new instance of the MappingConfiguration class.
         /// </summary>
         /// <param name="classMaps">The class maps for mapping objects to XML.</param>
-        public MappingConfiguration(Dictionary<Type, ClassMap<object>> classMaps)
+        public MappingConfiguration(Dictionary<Type, ClassMap<object>> classMaps, string name = default)
         {
             _classMaps = classMaps;
+            Name = name;
         }
 
         /// <summary>
@@ -25,6 +31,11 @@ namespace XmlMapper.Core.Models
         /// <param name="type">The type to retrieve the class map for.</param>
         /// <returns>The class map for the specified type, or null if no class map exists for the type.</returns>
         public ClassMap<object> GetClassMap(Type type) => _classMaps.TryGetValue(type, out var classMap) ? classMap : null;
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 
 }

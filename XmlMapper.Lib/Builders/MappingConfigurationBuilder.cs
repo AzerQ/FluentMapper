@@ -9,12 +9,20 @@ namespace XmlMapper.Core.Builders
     /// </summary>
     public class MappingConfigurationBuilder
     {
+        private string _configurationName;
+        private Dictionary<Type, ClassMap<object>> _classMaps = new Dictionary<Type, ClassMap<object>>();
+        
         /// <summary>
         /// Initializes a new instance of the MappingConfigurationBuilder class.
         /// </summary>
         public MappingConfigurationBuilder() { }
 
-        private Dictionary<Type, ClassMap<object>> _classMaps = new Dictionary<Type, ClassMap<object>>();
+        public MappingConfigurationBuilder SetConfigurationName(string configName)
+        {
+            _configurationName = configName;
+            return this;
+        }
+       
 
         /// <summary>
         /// Adds a class configuration to the mapping configuration.
@@ -37,7 +45,7 @@ namespace XmlMapper.Core.Builders
         /// <returns>The built mapping configuration.</returns>
         public MappingConfiguration Build()
         {
-            return new MappingConfiguration(_classMaps);
+            return new MappingConfiguration(_classMaps, _configurationName);
         }
     }
 

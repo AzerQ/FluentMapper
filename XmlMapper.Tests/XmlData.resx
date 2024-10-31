@@ -117,20 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="UserContext" xml:space="preserve">
-    <value>&lt;UsersContext&gt;
-    &lt;User&gt;
-        &lt;FullName&gt;Boris Jonson&lt;/FullName&gt;
-        &lt;Login&gt;b.jonson&lt;/Login&gt;
-        &lt;Age&gt;50&lt;/Age&gt;
-        &lt;BIO&gt;I'm gangster sheet!!!&lt;/BIO&gt;
-        &lt;RefItem name="roles" id="1"/&gt;
-    &lt;/User&gt;
-    &lt;Roles id="1"&gt;
-        &lt;Role id="777" name="God" description="God mode all rights"/&gt;
-        &lt;Role id="666" name="Satan" description="No more rights!!!"/&gt;
-        &lt;Role id="111" name="SampleUser" description="Only read rights"/&gt;
-    &lt;/Roles&gt;
-&lt;/UsersContext&gt;</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="UsersContext" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>XmlData\UsersContext.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+    <comment>Users xml data for testing</comment>
+  </data>
+  <data name="LibraryContext" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>XmlData\LibraryContext.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+    <comment>Library xml data for testing</comment>
   </data>
 </root>

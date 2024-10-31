@@ -26,19 +26,27 @@ namespace XmlMapper.Core.Models
         public Type ItemType { get; private set; }
 
         /// <summary>
+        /// Gets or sets a boolean value indicating whether to use the declared class as an XML element.
+        /// </summary>
+        public bool UseDeclaredClassXmlElement { get; private set; }
+
+        /// <summary>
         /// Initializes a new instance of the LinkedPropertyMap class.
         /// </summary>
         /// <param name="property">The property being mapped.</param>
-        public LinkedPropertyMap(PropertyInfo property)
+        /// <param name="useDeclaredClassXmlElement">Flag indicating whether to use the declared class XmlElement.</param>
+        public LinkedPropertyMap(PropertyInfo property, bool useDeclaredClassXmlElement = false)
         {
             Property = property;
 
             Type propType = Property.PropertyType;
 
             IsCollection = propType.IsGenericType &&
-                propType.GetGenericTypeDefinition() == typeof(List<>);
+                           propType.GetGenericTypeDefinition() == typeof(List<>);
 
             ItemType = IsCollection ? propType.GetGenericArguments().First() : propType;
+
+            UseDeclaredClassXmlElement = useDeclaredClassXmlElement;
         }
     }
 }
