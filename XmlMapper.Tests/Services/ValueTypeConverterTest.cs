@@ -42,4 +42,23 @@ public class ValueTypeConverterTest
         Assert.AreEqual(convertedValue, exceptedValue);
     }
     
+    [TestMethod]
+    [DataRow("Red", Color.Red)]
+    [DataRow("White", Color.White)]
+    [DataRow("Black", Color.Black)]
+    [DataRow("Green", Color.Green)]
+    public void TestConvert_Enum_FromString(string inputStr, Color exceptedValue)
+    {
+        Color convertedValue = (Color)_valueTypeConverter.ConvertToDestinationType(inputStr, typeof(Color));
+        Assert.AreEqual(convertedValue, exceptedValue);
+    }
+    
+    
+    public enum Color
+    {
+        Red,
+        White,
+        Black,
+        Green
+    }
 }
