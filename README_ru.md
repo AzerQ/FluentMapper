@@ -8,7 +8,7 @@
 
 ```bash
 # Предполагаемая команда для установки (например, через NuGet)
-dotnet add package XmlMapper
+dotnet add package XmlMapper.Fluent
 ```
 
 ## Быстрый старт

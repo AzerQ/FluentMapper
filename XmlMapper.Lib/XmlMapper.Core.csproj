@@ -3,6 +3,34 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Nullable>disable</Nullable>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>XmlMapper.Fluent</PackageId>
+    <Title>XmlMapper.Fluent</Title>
+    <Authors>Azerq</Authors>
+    <Description>XmlMapper is a library for convenient mapping of data from XML to C# classes using XPath selectors. It supports flexible mapping configuration, including value transformations and nested objects.</Description>
+    <Copyright>(c) Azerq</Copyright>
+    <PackageProjectUrl>https://github.com/AzerQ/XmlMapper</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/AzerQ/XmlMapper</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>XML</PackageTags>
+    <PackageIcon>package_icon.png</PackageIcon>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <FileVersion>1.0.0</FileVersion>
   </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DocumentationFile>bin\Debug\XmlMapper.Core.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DocumentationFile>bin\Release\XmlMapper.Core.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Update="package_icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
