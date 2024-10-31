@@ -1,4 +1,5 @@
 using XmlMapper.Tests.Models;
+using XmlMapper.Tests.Utils;
 
 namespace XmlMapper.Tests.EqualityComparers;
 

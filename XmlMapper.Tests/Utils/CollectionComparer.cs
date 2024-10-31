@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace XmlMapper.Tests;
+namespace XmlMapper.Tests.Utils;
 
 public static class CollectionComparer
 {

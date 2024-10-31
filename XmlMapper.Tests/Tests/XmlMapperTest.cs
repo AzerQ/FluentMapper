@@ -2,6 +2,7 @@ using XmlMapper.Core;
 using XmlMapper.Core.Models;
 using XmlMapper.Tests.MappingConfigurations;
 using XmlMapper.Tests.Models;
+using XmlMapper.Tests.Utils;
 
 namespace XmlMapper.Tests
 {

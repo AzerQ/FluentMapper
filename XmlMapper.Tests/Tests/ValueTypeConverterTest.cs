@@ -1,10 +1,9 @@
 using JetBrains.Annotations;
 using XmlMapper.Core.Services;
 
-namespace XmlMapper.Tests.Services;
+namespace XmlMapper.Tests;
 
 [TestClass]
-[TestSubject(typeof(ValueTypeConverter))]
 public class ValueTypeConverterTest
 {
     private readonly ValueTypeConverter _valueTypeConverter = new();
