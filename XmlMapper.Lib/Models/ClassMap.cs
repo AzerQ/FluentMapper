@@ -87,6 +87,26 @@ namespace XmlMapper.Core.Models
             return this;
         }
 
+        /// <summary>
+        /// Automatically maps a property to an XML element or attribute based on the property name.
+        /// </summary>
+        /// <remarks>Generate  xpath selector in this format: PropertyName | @PropertyName</remarks>
+        /// <typeparam name="TProperty">The type of the property.</typeparam>
+        /// <param name="propertyExpr">The expression representing the property.</param>
+        /// <returns>The ClassMap instance for method chaining.</returns>
+        public ClassMap<TSource> ForPropertyAuto<TProperty>(Expression<Func<TSource, TProperty>> propertyExpr)
+        {
+            PropertyInfo propertyInfo = GetPropertyInfo(propertyExpr);
+
+            string attributeName;
+            string elementName = attributeName = propertyInfo.Name;
+            string xpathSelector = $"{elementName} | @{attributeName}";
+
+            var propertyMap = new PropertyMap(propertyInfo, xpathSelector);
+            _propertyMaps.Add(propertyMap);
+            return this;
+        }
+
         public ClassMap<TSource> ForPropertyCustom<TProperty>(Expression<Func<TSource, TProperty>> propertyExpr,
             string xpath, Func<TProperty, TProperty> preConverter)
         {
