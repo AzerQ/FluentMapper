@@ -34,7 +34,7 @@ public class ValueTypeConverterTest
     [TestMethod]
     [DataRow("128,934", 128.934)]
     [DataRow("15,9", 15.9)]
-    [DataRow("-3000.1278", -3000.1278)]
+    [DataRow("-3000,1278", -3000.1278)]
     [DataRow("0,1413154151446146", 0.1413154151446146)]
     public void TestConvert_Double_FromString(string inputStr, double exceptedValue)
     {
