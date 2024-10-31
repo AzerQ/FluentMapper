@@ -52,6 +52,22 @@ public class ValueTypeConverterTest
         Color convertedValue = (Color)_valueTypeConverter.ConvertToDestinationType(inputStr, typeof(Color));
         Assert.AreEqual(convertedValue, exceptedValue);
     }
+
+    private static IEnumerable<object[]> DateTimeConvertTestData =>
+    [
+        ["16.02.2023", new DateTime(2023, 2, 16)],
+        ["02-03-2024", new DateTime(2024, 3, 2)],
+        ["02-03-2024 18:05:53", new DateTime(2024, 3, 2, 18, 5, 53)],
+        ["2024-10-31T17:32:31.0Z", new DateTime(2024, 10, 31, 20,32,31)]
+    ];
+    
+    [TestMethod]
+    [DynamicData(nameof(DateTimeConvertTestData), DynamicDataSourceType.Property)]
+    public void TestConvert_DateTime_FromString(string inputStr, DateTime exceptedValue)
+    {
+        DateTime convertedValue = (DateTime)_valueTypeConverter.ConvertToDestinationType(inputStr, typeof(DateTime));
+        Assert.AreEqual(convertedValue, exceptedValue);
+    }
     
     
     public enum Color
