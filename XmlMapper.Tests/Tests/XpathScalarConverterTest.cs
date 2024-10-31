@@ -94,4 +94,11 @@ public class XpathScalarConverterTest
         string selectedValue = _xpathScalarConverter.GetXpathResultValue(collection);
         Assert.AreEqual(selectedValue, exceptedValue);
     }
+
+    [TestMethod]
+    public void Test_Incorrect_ObjectType_ThrowsException()
+    {
+        Assert.ThrowsException<XpathValueConvertException>
+            (() => _xpathScalarConverter.GetXpathResultValue(DateTime.Now));
+    }
 }
