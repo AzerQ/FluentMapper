@@ -8,7 +8,7 @@ First, add the project as a dependency in your application.
 
 ```bash
 # Assumed command for installation (e.g., via NuGet)
-dotnet add package XmlMapper
+dotnet add package XmlMapper.Fluent
 ```
 
 ## Quick Start
