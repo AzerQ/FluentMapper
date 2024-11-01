@@ -85,6 +85,16 @@ public class ValueTypeConverterTest
         Assert.AreEqual(convertedValue, exceptedValue);
     }
 
+    [TestMethod]
+    [DataRow("9999999999", 999_999_999_9l)]
+    [DataRow("5689", 5689l)]
+    [DataRow("-1234567890", -1234567890l)]
+    public void TestConvert_Long_FromString(string inputString, long exceptedValue)
+    {
+        var convertedValue = GetConvertedValue<long>(inputString);
+        Assert.AreEqual(convertedValue, exceptedValue);
+    }
+
 
     public enum Color
     {
