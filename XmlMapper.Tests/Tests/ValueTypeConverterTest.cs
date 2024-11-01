@@ -8,6 +8,8 @@ public class ValueTypeConverterTest
 {
     private readonly ValueTypeConverter _valueTypeConverter = new();
 
+    private T GetConvertedValue<T>(string inputStr) => (T)_valueTypeConverter.ConvertToDestinationType(inputStr, typeof(T));
+
     [TestMethod]
     [DataRow("true", true)]
     [DataRow("false", false)]
@@ -15,7 +17,7 @@ public class ValueTypeConverterTest
     [DataRow("FALSE", false)]
     public void TestConvert_Boolean_FromString(string inputStr, bool exceptedValue)
     {
-       bool convertedValue = (bool)_valueTypeConverter.ConvertToDestinationType(inputStr, typeof(bool));
+       var convertedValue = GetConvertedValue<bool>(inputStr);
        Assert.AreEqual(convertedValue, exceptedValue);
     }
     
@@ -26,7 +28,7 @@ public class ValueTypeConverterTest
     [DataRow("128000000", 128_000_000)]
     public void TestConvert_Int_FromString(string inputStr, int exceptedValue)
     {
-        int convertedValue = (int)_valueTypeConverter.ConvertToDestinationType(inputStr, typeof(int));
+        var convertedValue = GetConvertedValue<int>(inputStr);
         Assert.AreEqual(convertedValue, exceptedValue);
     }
     
@@ -37,7 +39,7 @@ public class ValueTypeConverterTest
     [DataRow("0,1413154151446146", 0.1413154151446146)]
     public void TestConvert_Double_FromString(string inputStr, double exceptedValue)
     {
-        double convertedValue = (double)_valueTypeConverter.ConvertToDestinationType(inputStr, typeof(double));
+        var convertedValue = GetConvertedValue<double>(inputStr);
         Assert.AreEqual(convertedValue, exceptedValue);
     }
     
@@ -48,7 +50,7 @@ public class ValueTypeConverterTest
     [DataRow("GreeN", Color.Green)]
     public void TestConvert_Enum_FromString(string inputStr, Color exceptedValue)
     {
-        Color convertedValue = (Color)_valueTypeConverter.ConvertToDestinationType(inputStr, typeof(Color));
+        var convertedValue = GetConvertedValue<Color>(inputStr);
         Assert.AreEqual(convertedValue, exceptedValue);
     }
 
@@ -64,11 +66,11 @@ public class ValueTypeConverterTest
     [DynamicData(nameof(DateTimeConvertTestData), DynamicDataSourceType.Property)]
     public void TestConvert_DateTime_FromString(string inputStr, DateTime exceptedValue)
     {
-        DateTime convertedValue = (DateTime)_valueTypeConverter.ConvertToDestinationType(inputStr, typeof(DateTime));
+        var convertedValue = GetConvertedValue<DateTime>(inputStr);
         Assert.AreEqual(convertedValue, exceptedValue);
     }
     
-    
+
     public enum Color
     {
         Red,
