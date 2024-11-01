@@ -17,10 +17,10 @@ public class ValueTypeConverterTest
     [DataRow("FALSE", false)]
     public void TestConvert_Boolean_FromString(string inputStr, bool exceptedValue)
     {
-       var convertedValue = GetConvertedValue<bool>(inputStr);
-       Assert.AreEqual(convertedValue, exceptedValue);
+        var convertedValue = GetConvertedValue<bool>(inputStr);
+        Assert.AreEqual(convertedValue, exceptedValue);
     }
-    
+
     [TestMethod]
     [DataRow("128", 128)]
     [DataRow("15", 15)]
@@ -31,7 +31,7 @@ public class ValueTypeConverterTest
         var convertedValue = GetConvertedValue<int>(inputStr);
         Assert.AreEqual(convertedValue, exceptedValue);
     }
-    
+
     [TestMethod]
     [DataRow("128,934", 128.934)]
     [DataRow("15,9", 15.9)]
@@ -42,7 +42,7 @@ public class ValueTypeConverterTest
         var convertedValue = GetConvertedValue<double>(inputStr);
         Assert.AreEqual(convertedValue, exceptedValue);
     }
-    
+
     [TestMethod]
     [DataRow("Red", Color.Red)]
     [DataRow("white", Color.White)]
@@ -61,7 +61,7 @@ public class ValueTypeConverterTest
         ["02-03-2024 18:05:53", new DateTime(2024, 3, 2, 18, 5, 53)],
         ["2024-10-31T17:32:31.0Z", new DateTime(2024, 10, 31, 20,32,31)]
     ];
-    
+
     [TestMethod]
     [DynamicData(nameof(DateTimeConvertTestData), DynamicDataSourceType.Property)]
     public void TestConvert_DateTime_FromString(string inputStr, DateTime exceptedValue)
@@ -69,7 +69,22 @@ public class ValueTypeConverterTest
         var convertedValue = GetConvertedValue<DateTime>(inputStr);
         Assert.AreEqual(convertedValue, exceptedValue);
     }
-    
+
+    private static IEnumerable<object[]> GuidConvertTestData =>
+    [
+            ["04606e81-a4ab-4378-8cc7-09edbb5e902d", new Guid("04606e81-a4ab-4378-8cc7-09edbb5e902d")],
+            ["{43472548-441a-40ec-bf8a-29566395341c}", new Guid("43472548-441a-40ec-bf8a-29566395341c")],
+
+    ];
+
+    [TestMethod]
+    [DynamicData(nameof(GuidConvertTestData), DynamicDataSourceType.Property)]
+    public void TestConvert_Guid_FromString(string inputStrnig, Guid exceptedValue)
+    {
+        var convertedValue = GetConvertedValue<Guid>(inputStrnig);
+        Assert.AreEqual(convertedValue, exceptedValue);
+    }
+
 
     public enum Color
     {
