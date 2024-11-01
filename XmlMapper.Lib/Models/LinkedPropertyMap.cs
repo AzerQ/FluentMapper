@@ -48,5 +48,10 @@ namespace XmlMapper.Core.Models
 
             UseDeclaredClassXmlElement = useDeclaredClassXmlElement;
         }
+
+        public override string ToString()
+        {
+            return $"[property: {Property.Name}, isCollection: {IsCollection}, itemType: {ItemType} , useDeclaredClassXmlElement: {UseDeclaredClassXmlElement}]";
+        }
     }
 }
