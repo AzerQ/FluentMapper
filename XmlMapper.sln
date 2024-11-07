@@ -12,10 +12,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Git", "Git", "{73B24653-AF7
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlMapper.Tests", "XmlMapper.Tests\XmlMapper.Tests.csproj", "{6A1A406D-8584-4E13-B30A-3D1A07A3E1DB}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{A3338128-F8E8-4A4A-AB76-2D9CACBA64D4}"
 	ProjectSection(SolutionItems) = preProject
 		README_ru.md = README_ru.md
 		README.md = README.md
+		Architecture.puml = Architecture.puml
 	EndProjectSection
 EndProject
 Global
