@@ -42,6 +42,14 @@ namespace XmlMapper.Core.Models
             PostConverter = postConverter;
             PreConverter = preConverter;
         }
+
+        public override string ToString()
+        {
+            bool hasPreConverter = PreConverter != null;
+            bool hasPostConverter = PostConverter != null;
+
+            return $"[property: {Property.Name}, xpath: {XPath}, hasPreConverter:{hasPreConverter}, hasPostConverter: {hasPostConverter}]";
+        }
     }
 
 }

@@ -163,5 +163,10 @@ namespace XmlMapper.Core.Models
         {
             return new ClassMap<object>(_type, _objectXPath, _propertyMaps, _linkedPropertyMaps);
         }
+
+        public override string ToString()
+        {
+            return $"[type: {_type}, xpath: {_objectXPath}]";
+        }
     }
 }
