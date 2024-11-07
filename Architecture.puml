@@ -1,0 +1,64 @@
+@startuml
+!define RECTANGLE class
+
+RECTANGLE CoreMappingEngine {
+    +MapData(source: string): T
+}
+
+RECTANGLE MappingConfig {
+    +AddMapping(property: string, selector: string, converter: IDataConverter)
+}
+
+interface IDataMapper {
+    +MapData(source: string): T
+}
+
+interface IDataNodeSelector {
+    +SelectNode(path: string): object
+}
+
+interface IDataConverter {
+    +Convert(value: object): object
+}
+
+interface ILogger {
+    +Log(message: string)
+}
+
+RECTANGLE DataMapperFactory {
+    +CreateDataMapper<T>(config: MappingConfig): IDataMapper
+}
+
+package "Modules" {
+    RECTANGLE XmlDataMapper {
+        +MapData(xmlString: string): T
+    }
+    RECTANGLE JsonDataMapper {
+        +MapData(jsonString: string): T
+    }
+    RECTANGLE XmlNodeSelector {
+        +SelectNode(xpath: string): object
+    }
+    RECTANGLE JsonNodeSelector {
+        +SelectNode(jsonpath: string): object
+    }
+    RECTANGLE XmlConverter
+    RECTANGLE JsonConverter
+}
+
+CoreMappingEngine "1" *-- "1" MappingConfig
+MappingConfig "1" *-- "*" IDataNodeSelector
+MappingConfig "1" *-- "*" IDataConverter
+CoreMappingEngine "1" *-- "1" DataMapperFactory
+DataMapperFactory "1" *-- "*" IDataMapper
+
+IDataMapper <|.. XmlDataMapper
+IDataMapper <|.. JsonDataMapper
+IDataNodeSelector <|.. XmlNodeSelector
+IDataNodeSelector <|.. JsonNodeSelector
+IDataConverter <|.. XmlConverter
+IDataConverter <|.. JsonConverter
+
+ILogger --> CoreMappingEngine : Uses
+
+@enduml
